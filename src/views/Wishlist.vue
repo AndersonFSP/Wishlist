@@ -1,26 +1,41 @@
 <template>
-  <div class="cards">
-    <Card
-      v-for="item in wishlist"
-      :key="item.code"
-      class="card"
-      :title="item.name"
-      :rating="item.rating"
-      :fullPriceInCents="item.fullPriceInCents"
-      :salePriceInCents="item.salePriceInCents"
-      :image="item.image"
-      wish
-      @on-click-button="removeItem(item)"
-    />
-  </div>
+  <section>
+    <div v-if="hasItems" class="cards">
+      <Card
+        v-for="item in wishlist"
+        :key="item.code"
+        class="card"
+        :title="item.name"
+        :rating="item.rating"
+        :fullPriceInCents="item.fullPriceInCents"
+        :salePriceInCents="item.salePriceInCents"
+        :image="item.image"
+        wish
+        @on-click-button="removeItem(item)"
+      />
+    </div>
+    <div v-else class="empty-content">
+      <HelperView 
+        icon="cart-plus" 
+        title="Sua whislist está vazia" 
+        description="Que tal explorar nossos produtos?" 
+        button-label="Explorar produtos"
+        @on-click-button="goToProductsList"
+      />
+    </div>
+  </section>
 </template>
 <script setup lang="ts">
 import { getWishlist, setWishlist } from '@/helpers/browser';
 import type { IProduct } from '@/types';
-import { onMounted, ref } from 'vue';
-import { Card } from '@/components'
+import { computed, onMounted, ref } from 'vue';
+import { Card, HelperView } from '@/components'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const wishlist = ref<IProduct[]>([])
+
+const hasItems = computed(() => wishlist.value.length)
 
 function setWish() {
   wishlist.value = getWishlist()
@@ -29,6 +44,10 @@ function setWish() {
 function removeItem(wish: IProduct) {
   wishlist.value = wishlist.value.filter(item => item.code !== wish.code)
   setWishlist(wishlist.value)
+}
+
+function goToProductsList() {
+  router.push({ name: 'Home' })
 }
 
 onMounted(setWish)
@@ -44,6 +63,12 @@ onMounted(setWish)
     flex: 1 0 300px;
     max-width: 250px;
     box-sizing: border-box;
+  }
+
+  .empty-content {
+    display: flex;
+    justify-content: center;
+    margin-top: @size-spacing-8;
   }
 
   @media screen and (min-width: 20em) {

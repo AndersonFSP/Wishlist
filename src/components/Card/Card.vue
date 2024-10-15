@@ -6,7 +6,7 @@
     <div class="button-container" @click="emits('on-click-button')">
       <CardFavoriteButton v-if="!wish" :active="active"  />
       <button v-else class="remove-button">
-        <i class="fa-solid fa-x"></i>
+        <i class="fa fa-times"></i>
       </button>
     </div>
     <p class="title">{{ title }}</p>
@@ -92,10 +92,14 @@ const { formattedPrice: salePriceFormatted } = useCurrencyFormatter(props.salePr
   .remove-button {
     border: none;
     cursor: pointer;
-    font-size: 1rem;
     background-color: transparent;
     background-color: #fff;
     border-radius: 50%;
+
+
+    i {
+      font-size: 20px;
+    }
   }
 
   .price {

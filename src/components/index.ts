@@ -5,3 +5,5 @@ export { default as Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs.vue
 export { default as Card } from '@/components/Card/Card.vue'
 export { default as CardFavoriteButton } from '@/components/Card/CardFavoriteButton.vue'
 export { default as CardRating } from '@/components/Card/CardRating.vue'
+export { default as HelperView } from '@/components/HelperView/HelperView.vue'
+export { default as Button } from '@/components/Button/Button.vue'
