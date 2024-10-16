@@ -1,14 +1,23 @@
 <template>
   <section class="container">
-    <div class="cards">
+    <div v-if="hasError"  class="error-content">
+      <HelperView 
+        icon="exclamation-circle" 
+        :title="errorMessage" 
+        description="Tente novamente mais tarde" 
+        button-label="Tentar novamente"
+        @on-click-button="handleGetProducts"
+      />
+    </div>
+    <div v-else class="cards">
       <Card
-        v-for="product in products"
+        v-for="product in listProducts"
         :key="product.code"
         class="card"
         :title="product.name"
         :rating="product.rating"
-        :fullPriceInCents="product.fullPriceInCents"
-        :salePriceInCents="product.salePriceInCents"
+        :full-price-in-cents="product.fullPriceInCents"
+        :sale-price-in-cents="product.salePriceInCents"
         :image="product.image"
         :active="product.active"
         @on-click-button="toggleFavorite(product)"
@@ -17,42 +26,68 @@
   </section>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { Card } from '@/components'
+import { computed, onMounted, ref } from 'vue'
+import { Card, HelperView } from '@/components'
 import { getWishlist, setWishlist } from '@/helpers/browser'
-import Mock from '@/services/mock-products.json'
+import ProductService from '@/services/ProductService'
 import type { IProduct } from '@/types'
 
-const products = ref([] as IProduct[])
+const products = ref<IProduct[]>([])
+const wishlist = ref<IProduct[]>([])
+const hasError = ref<boolean>(false)
+const errorMessage = ref<string>('')
 
-function loadProducts() {
-  const wishlist = getWishlist()
-  products.value = Mock.products.map(product => ({
+const listProducts = computed(() =>
+  products.value.map(product => ({
     ...product,
-    active: wishlist.some(wish => wish.code === product.code),
-  }))
+    active: wishlist.value.some(wish => wish.code === product.code),
+  })),
+)
+
+async function handleGetProducts() {
+  hasError.value = false
+  try {
+    const { products: response } = await ProductService.getProducts()
+    products.value = response
+  } catch (err) {
+    const baseError = err
+    errorMessage.value = typeof baseError === 'string' ? baseError : 'Verifique sua conexão'
+    hasError.value = true
+  }
+}
+
+function handleGetWishList() {
+  wishlist.value = getWishlist()
 }
 
 function toggleFavorite(product: IProduct) {
-  const wishlist = getWishlist()
-  const isFavorite = wishlist.some(item => item.code === product.code)
+  const isFavorite = wishlist.value.some(item => item.code === product.code)
   if (isFavorite) {
-    const updatedWishlist = wishlist.filter(item => item.code !== product.code)
+    const updatedWishlist = wishlist.value.filter(item => item.code !== product.code)
+    wishlist.value = updatedWishlist
     setWishlist(updatedWishlist)
   } else {
-    wishlist.push(product)
-    setWishlist(wishlist)
+    wishlist.value.push(product)
+    setWishlist(wishlist.value)
   }
-  loadProducts()
 }
-onMounted(loadProducts)
+onMounted(() => {
+  handleGetProducts()
+  handleGetWishList()
+})
 </script>
 <style lang="less" scoped>
 .container {
+  .error-content {
+    display: flex;
+    justify-content: center;
+    margin-top: @size-spacing-8;
+  }
+
   .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: @size-spacing-6;
+    gap: @size-spacing-8;
   }
 
   .card {

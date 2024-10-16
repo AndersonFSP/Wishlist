@@ -8,10 +8,11 @@ export default [
   ...vueTsEslintConfig(),
   {
     rules: {
-      camelcase: 1,
+      'camelcase': 1,
       'vue/multi-word-component-names': 'off',
       'vue/attributes-order': 'error',
-      semi: ['error', 'never'],
+      'vue/attribute-hyphenation': 'error',
+      'semi': ['error', 'never'],
     },
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],

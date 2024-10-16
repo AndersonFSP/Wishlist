@@ -1,18 +1,20 @@
 <template>
   <section>
     <div v-if="hasItems" class="cards">
-      <Card
-        v-for="item in wishlist"
-        :key="item.code"
-        class="card"
-        :title="item.name"
-        :rating="item.rating"
-        :fullPriceInCents="item.fullPriceInCents"
-        :salePriceInCents="item.salePriceInCents"
-        :image="item.image"
-        wish
-        @on-click-button="removeItem(item)"
-      />
+      <TransitionGroup name="list">
+        <Card
+          v-for="item in wishlist"
+          :key="item.code"
+          class="card"
+          :title="item.name"
+          :rating="item.rating"
+          :full-price-in-cents="item.fullPriceInCents"
+          :sale-price-in-cents="item.salePriceInCents"
+          :image="item.image"
+          wish
+          @on-click-button="removeItem(item)"
+        />
+      </TransitionGroup>
     </div>
     <div v-else class="empty-content">
       <HelperView 
@@ -87,5 +89,17 @@ onMounted(setWish)
     .card {
       max-width: calc(33% - 1em);
     }
+  }
+
+  .list-enter-active, .list-leave-active {
+    transition: all 0.2s ease;
+  }
+  .list-enter-from, .list-leave-to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .list-enter-to, .list-leave-from {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>

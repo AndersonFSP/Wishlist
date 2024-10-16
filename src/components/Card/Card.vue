@@ -95,8 +95,6 @@ const { formattedPrice: salePriceFormatted } = useCurrencyFormatter(props.salePr
     background-color: transparent;
     background-color: #fff;
     border-radius: 50%;
-
-
     i {
       font-size: 20px;
     }

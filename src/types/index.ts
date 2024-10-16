@@ -4,15 +4,22 @@ interface IProductDetails {
 }
 
 export interface IProduct {
-  code: string;
-  name: string;
-  available: boolean;
-  visible: boolean;
-  details: IProductDetails;
-  fullPriceInCents: string;
-  salePriceInCents: string;
-  rating: number;
-  image: string;
-  stockAvailable: boolean;
+  code: string
+  name: string
+  available: boolean
+  visible: boolean
+  details: IProductDetails
+  fullPriceInCents: string
+  salePriceInCents: string
+  rating: number
+  image: string
+  stockAvailable: boolean
   active?: boolean
+}
+
+export interface IProductResponse {
+  total: number
+  pageSize: number
+  totalPages: number
+  products: IProduct[]
 }
