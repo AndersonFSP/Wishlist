@@ -1,11 +1,11 @@
 <template>
   <div class="card">
     <div class="card-image-container">
-      <img :src="image" alt="Nome do Produto">
+      <img :src="image" alt="Nome do Produto" data-testid="image">
     </div>
     <div class="button-container" @click="emits('on-click-button')">
-      <CardFavoriteButton v-if="!wish" :active="active"  />
-      <button v-else class="remove-button">
+      <CardFavoriteButton v-if="!wish" :favorited="favorited" />
+      <button v-else class="remove-button" data-testid="remove-button">
         <i class="fa fa-times"></i>
       </button>
     </div>
@@ -27,7 +27,7 @@ interface Props {
   fullPriceInCents: string
   salePriceInCents: string
   image: string
-  active?: boolean
+  favorited?: boolean
   wish?: boolean
 }
 interface Emits {

@@ -1,6 +1,6 @@
 <template>
   <RouterLink exact :to="to" class="link">
-    <i v-if="icon" class="fa fa-2x" :class="iconClass"></i>
+    <i v-if="icon" class="fa fa-2x" :class="iconClass" data-testid="link-icon"></i>
     <span class="link-text">
       <slot></slot>
     </span>

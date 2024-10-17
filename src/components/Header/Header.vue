@@ -5,6 +5,7 @@
         <img
           src="@/assets/logo.svg"
           alt="Logo header"
+          data-testid="logo"
           height="30"
         />
       </div>

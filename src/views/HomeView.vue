@@ -19,7 +19,7 @@
         :full-price-in-cents="product.fullPriceInCents"
         :sale-price-in-cents="product.salePriceInCents"
         :image="product.image"
-        :active="product.active"
+        :favorited="product.favorited"
         @on-click-button="toggleFavorite(product)"
       />
     </div>
@@ -40,7 +40,7 @@ const errorMessage = ref<string>('')
 const listProducts = computed(() =>
   products.value.map(product => ({
     ...product,
-    active: wishlist.value.some(wish => wish.code === product.code),
+    favorited: wishlist.value.some(wish => wish.code === product.code),
   })),
 )
 

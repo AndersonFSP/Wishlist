@@ -1,8 +1,8 @@
 <template>
   <div class="menu-container" @mouseover="show" @mouseleave="hide">
-    <div class="menu-item" >
-      <i class="fa fa-user-o fa-2x"></i>
-      <div v-if="isDropdownVisible" class="dropdown-menu">
+    <div class="menu-item">
+      <i class="fa fa-user-o fa-2x" data-testid="user-icon"></i>
+      <div v-show="isDropdownVisible" class="dropdown-menu" data-testid="dropdown">
         <div class="dropdown-arrow"></div>
         <ul>
           <li><a href="#">Entrar</a></li>
@@ -21,7 +21,7 @@ import { ref } from 'vue'
 const isDropdownVisible = ref(false)
 
 function show() {
-  isDropdownVisible.value = true;
+  isDropdownVisible.value = true
 }
 
 function hide() {
@@ -33,7 +33,7 @@ function hide() {
 .menu-container {
   position: relative;
   display: inline-block;
-  color: #FFF;
+  color: #fff;
 }
 
 .dropdown-menu {
@@ -51,12 +51,11 @@ function hide() {
     padding: 0;
     margin: 0;
   }
-  
+
   li {
     padding: @size-spacing-1 @size-spacing-2;
   }
 }
-
 
 .dropdown-menu a {
   text-decoration: none;

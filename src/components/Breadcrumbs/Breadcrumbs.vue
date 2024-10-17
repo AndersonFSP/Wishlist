@@ -1,6 +1,10 @@
 <template>
   <nav>
-    <span v-for="(breadcrumb, index) in breadcrumbs" :key="index" class="container">
+    <span
+      v-for="(breadcrumb, index) in breadcrumbs"
+      :key="index"
+      class="container"
+    >
       <span v-if="index < breadcrumbs.length - 1" class="crumb">
         <RouterLink :to="{ name: breadcrumb }">
           {{ breadcrumb }}
@@ -13,7 +17,7 @@
   </nav>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const router = useRoute()
@@ -23,7 +27,7 @@ const breadcrumbs = computed(() => router.meta?.breadcrumbs as string[])
 <style lang="less" scoped>
 nav {
   color: @primary-color;
-  
+
   .current-crumb {
     font-weight: 900;
   }

@@ -17,10 +17,10 @@
       </TransitionGroup>
     </div>
     <div v-else class="empty-content">
-      <HelperView 
-        icon="cart-plus" 
-        title="Sua whislist está vazia" 
-        description="Que tal explorar nossos produtos?" 
+      <HelperView
+        icon="cart-plus"
+        title="Sua whislist está vazia"
+        description="Que tal explorar nossos produtos?"
         button-label="Explorar produtos"
         @on-click-button="goToProductsList"
       />
@@ -28,9 +28,9 @@
   </section>
 </template>
 <script setup lang="ts">
-import { getWishlist, setWishlist } from '@/helpers/browser';
-import type { IProduct } from '@/types';
-import { computed, onMounted, ref } from 'vue';
+import { getWishlist, setWishlist } from '@/helpers/browser'
+import type { IProduct } from '@/types'
+import { computed, onMounted, ref } from 'vue'
 import { Card, HelperView } from '@/components'
 import { useRouter } from 'vue-router'
 
@@ -55,51 +55,54 @@ function goToProductsList() {
 onMounted(setWish)
 </script>
 <style lang="less" scoped>
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: @size-spacing-6;
-  }
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: @size-spacing-6;
+}
 
+.card {
+  flex: 1 0 300px;
+  max-width: 250px;
+  box-sizing: border-box;
+}
+
+.empty-content {
+  display: flex;
+  justify-content: center;
+  margin-top: @size-spacing-8;
+}
+
+@media screen and (min-width: 20em) {
   .card {
-    flex: 1 0 300px;
-    max-width: 250px;
-    box-sizing: border-box;
+    max-width: calc(100% - 1em);
   }
+}
 
-  .empty-content {
-    display: flex;
-    justify-content: center;
-    margin-top: @size-spacing-8;
+@media screen and (min-width: 40em) {
+  .card {
+    max-width: calc(50% - 1em);
   }
+}
 
-  @media screen and (min-width: 20em) {
-    .card {
-      max-width: calc(100% - 1em);
-    }
+@media screen and (min-width: 60em) {
+  .card {
+    max-width: calc(33% - 1em);
   }
+}
 
-  @media screen and (min-width: 40em) {
-    .card {
-      max-width: calc(50% - 1em);
-    }
-  }
-
-  @media screen and (min-width: 60em) {
-    .card {
-      max-width: calc(33% - 1em);
-    }
-  }
-
-  .list-enter-active, .list-leave-active {
-    transition: all 0.2s ease;
-  }
-  .list-enter-from, .list-leave-to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .list-enter-to, .list-leave-from {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.2s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.list-enter-to,
+.list-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>

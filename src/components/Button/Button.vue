@@ -1,5 +1,5 @@
 <template>
-  <button :aria-label="label">
+  <button :aria-label="label" @click="emits('on-click')">
     {{ label }}
   </button>
 </template>
@@ -9,7 +9,11 @@
 interface Props {
   label: string
 }
+interface Emits {
+  (event: 'on-click'): void
+}
 defineProps<Props>()
+const emits = defineEmits<Emits>()
 </script>
 
 <style scoped lang="less">
