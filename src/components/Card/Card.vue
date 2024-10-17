@@ -46,7 +46,7 @@ const { formattedPrice: salePriceFormatted } = useCurrencyFormatter(props.salePr
   border-radius: @size-radius-2;
   border: 1px solid lightgray;
   max-width: 250px;
-  min-height: 380px;
+  min-height: 350px;
   padding: @size-spacing-4;
   text-align: left;
   box-shadow: 6px 2px 5px rgba(0, 0, 0, 0.4);

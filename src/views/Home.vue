@@ -87,7 +87,7 @@ onMounted(() => {
   .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: @size-spacing-8;
+    gap: @size-spacing-6;
   }
 
   .card {
