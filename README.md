@@ -2,13 +2,12 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+## Wishlist API Requirement
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+This project requires the **Wishlist API** to function properly. Make sure to have the API set up and running to handle wishlist-related functionality.
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+You can find the API repository and instructions for setup at the following link:
+[Wishlist API Repository](https://github.com/AndersonFSP/Wishlist-API)
 
 ## Customize configuration
 
